@@ -74,7 +74,7 @@
   "sourceMap": "27:645:0:-;;;127:98;8:9:-1;5:2;;;30:1;27;20:12;5:2;127:98:0;167:10;159:5;;:18;;;;;;;;;;;;;;;;;;27:645;;;;;;",
   "deployedSourceMap": "27:645:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:645:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;488:179;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;488:179:0;;;;;;;;;;;;;;;;;;;:::i;:::-;;81:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;54:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;368:112;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;368:112:0;;;;;;;;;;;;;;;;;:::i;:::-;;488:179;283:5;;;;;;;;;;;269:19;;:10;:19;;;266:34;;;556:19;589:11;556:45;;612:8;:21;;;634:24;;612:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;612:47:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;612:47:0;;;;299:1;266:34;488:179;:::o;81:36::-;;;;:::o;54:20::-;;;;;;;;;;;;;:::o;368:112::-;283:5;;;;;;;;;;;269:19;;:10;:19;;;266:34;;;463:9;436:24;:36;;;;266:34;368:112;:::o",
   "source": "pragma solidity ^0.5.0;\r\n\r\ncontract Migrations {\r\n    address public owner;\r\n    uint public last_completed_migration; \r\n\r\n    constructor() public {\r\n        owner = msg.sender;\r\n        // last_completed_migration = \r\n    }\r\n\r\n    modifier restricted() {\r\n        if(msg.sender == owner)\r\n        _; // to continue to func in which modifier was called\r\n    }\r\n\r\n    function setCompleted (uint completed) public restricted {\r\n        last_completed_migration = completed;\r\n    }\r\n\r\n    function upgrade(address new_address ) public restricted {\r\n        Migrations upgraded = Migrations(new_address);\r\n        upgraded.setCompleted(last_completed_migration);\r\n    }\r\n\r\n}",
-  "sourcePath": "C:\\Users\\maitr\\Documents\\GitHub\\defi-staking-app-starter\\defi-staking-app-starter\\src\\contracts\\Migrations.sol",
+  "sourcePath": "C:\\Users\\maitr\\Documents\\GitHub\\Blockchain_starter_app\\defi-staking-app-starter\\src\\contracts\\Migrations.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -1465,9 +1465,17 @@
     "name": "solc",
     "version": "0.5.17+commit.d19bba13.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x5d8C24bC40F66a18469037eCF7432A73707EaaB5",
+      "transactionHash": "0x1e26fd72d8928a66f81bfb352a8a9dc89ca32c2a541870a04a78292dadf4e4f9"
+    }
+  },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-04T18:23:40.320Z",
+  "updatedAt": "2022-02-06T20:11:25.549Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },
