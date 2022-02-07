@@ -6,10 +6,10 @@ module.exports = {
         development:{
             host: "127.0.0.1",
             port: 7545,
-            network_id: "5777" //any network
+            network_id: "*" //any network
         },
     },
-    contracts_directory: './src/contracts',
+    contracts_directory: './src/contracts/',
     contracts_build_directory: './src/truffle_abis',
     compilers:{
         solc: {
