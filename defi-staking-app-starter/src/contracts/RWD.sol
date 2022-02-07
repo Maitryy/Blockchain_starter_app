@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity >0.5.0;
 
 contract RWD {
     string public name = 'Reward Token';

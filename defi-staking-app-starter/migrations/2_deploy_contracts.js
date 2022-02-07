@@ -5,6 +5,7 @@ const DecentralBank = artifacts.require('DecentralBank');
 module.exports = async function (deployer, network, accounts) {
     // deploy Tether
     await deployer.deploy(Tether);
+    const tether = await Tether.deployed();
     // deploy RWD
     await deployer.deploy(RWD);
     const rwd = await RWD.deployed();
@@ -16,6 +17,6 @@ module.exports = async function (deployer, network, accounts) {
     await rwd.transfer(decentralBank.address, '1000000000000000000000000');
 
     //distribute 100 tether to investors..
-    await tether.transfer(accounts[1], '1000000000000000000')
+    await tether.transfer(accounts[1], '100000000000000000000')
 };
   
