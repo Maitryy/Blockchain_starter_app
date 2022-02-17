@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {Component} from 'react'
 import tether from '../tether.png' 
 
-function Main() {
+class Main extends Component{
+render(){
+    console.log(this.props.tetherBalance)
   return (
+    
     <div id='content' className='mt-3'>
+        
         <table className='table text-muted text-center'>
             <thead>
                  <tr style={{color:'black'}}>
@@ -13,27 +17,36 @@ function Main() {
             </thead>
             <tbody>
                 <tr style={{color:'black'}}>
-                    <td>USDT</td>
-                    <td>RWD</td>
+                    <td> {window.web3.utils.fromWei(this.props.stakingBalance, 'Ether')} USDT </td>
+                    <td>{window.web3.utils.fromWei(this.props.rwdBalance, 'Ether')} RWD</td>
                 </tr>
             </tbody>
         </table>
         <div className="card mb-2" style={{opacity: '0.9'}}>
-            <form action="" className='mb-3'>
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                let amount
+                amount = this.input.value.toString()
+                amount = window.web3.utils.toWei(amount, 'Ether')
+                this.props.stakeTokens(amount) 
+            }} className='mb-3'>
                 <div style={{borderSpacing: '0 1em'}}>
                     <label htmlFor="" className='float-left' style={{marginLeft: '15px'}}>
                         <b>Stake Tokens</b> 
                     </label>
                     <span  className='float-right' style={{marginRight: '8px'}}>
-                        Balance: 
+                        Balance: {window.web3.utils.fromWei(this.props.tetherBalance, 'Ether')}
                     </span>
                     <div className="input-group mb-4">
                         <input type="text" 
                         placeholder='0'
+                        ref={(input)=>this.input = input}
                         required />
-                        <div className='input grouped-text'>
+                        <div className='input-group-open'>
+                            <div className='input-group-text'>
                             <img src={tether} alt='tether' height='35' />
                             &nbsp;  USDT
+                            </div>
                         </div>
                     </div>
                     <button type='submit' className='btn btn-warning btn-lg btn-block'>DEPOSIT</button>
@@ -44,7 +57,7 @@ function Main() {
             <div className='card-body text-center' style={{color: 'blue'}}> AIRDROP</div>
         </div>
     </div>
-  )
+  )}
 }
 
 export default Main

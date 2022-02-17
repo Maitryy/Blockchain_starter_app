@@ -85,8 +85,41 @@
         }
 
         this.setState({loading: false})
-
      }
+
+     //staking and unstaking function 
+     // leverage decentralBank contract -> deposit and unstaking
+
+     //staking funtion
+    //  stakeTokens = (amount) => {
+    //      this.setState({loading: true});
+    //      await this.state.tether.methods.approve(this.state.decentralBank._address, amount).send({from: this.state.account}).on('transactionHash', (hash) =>{
+    //      this.state.decentralBank.methods.depositTokens(amount).send({from: this.state.account}).on('transactionHash', (hash) =>{
+    //          this.setState({loading: false});
+    //      })
+    //     })
+    //  }
+    stakeTokens = async (amount) => {
+        this.setState({ loading: true });
+      
+        await this.state.tether.methods
+          .approve(this.state.decentralBank._address, amount)
+          .send({ from: this.state.account });
+      
+        await this.state.decentralBank.methods
+          .depositTokens(amount)
+          .send({ from: this.state.account });
+      
+        this.setState({ loading: false });
+      
+      };
+     //unstaking function
+      unstakeTokens = () => {
+        this.setState({loading: true});
+        this.state.decentralBank.methods.unstakeTokens().send({from: this.state.account}).on('transactionHash', (hash) =>{
+            this.setState({loading: false});
+        })
+    }
 
      constructor(props) {
          super(props)
@@ -96,12 +129,20 @@
              rwd: {},
              decentralBank: {},
              tethterBalance: '0',
-             rwdBAlance: '0',
+             rwdBalance: '0',
              stakingBalance: '0',
              loading: true
          }
      }
      render(){
+         let content 
+         { this.state.loading ? content  = <p id='loader' className='textcenter' style={{margin: '30px'}}>Loading... </p> : content = <Main 
+             tetherBalance={this.state.tetherBalance}
+             rwdBalance = {this.state.rwdBalance}
+             stakingBalance = {this.state.stakingBalance}
+             stakeTokens={this.stakeTokens}
+             unstakeTokens={this.unstakeTokens}
+         />}
         return (
             <div>
             <Navbar account={this.state.account}/>
@@ -110,7 +151,8 @@
                 <div className='row'>
                     <main role='main' className='col-lg-12 ml-auto mr-auto' style={{maxWidth: '600px', minHeight: '100vm'}}>
                         <div>
-                            <Main/>
+                            {/* <Main/> */}
+                            {content}
                         </div>
                     </main>
                 </div>
