@@ -6,6 +6,8 @@
  import RWD from '../truffle_abis/RWD.json'
  import DecentralBank from '../truffle_abis/DecentralBank.json'
  import Main from './Main.js';
+ import ParticleSettings from './ParticleSettings.js';
+// import { relative } from 'path/posix';
  
  class App extends Component {
      // this will run first
@@ -114,12 +116,16 @@
       
       };
      //unstaking function
-      unstakeTokens = () => {
-        this.setState({loading: true});
-        this.state.decentralBank.methods.unstakeTokens().send({from: this.state.account}).on('transactionHash', (hash) =>{
-            this.setState({loading: false});
-        })
-    }
+     unstakeTokens = async () => {
+        this.setState({ loading: true });
+      
+        await this.state.decentralBank.methods
+          .unstakeTokens()
+          .send({ from: this.state.account });
+      
+        this.setState({ loading: false });
+      
+      };
 
      constructor(props) {
          super(props)
@@ -144,7 +150,10 @@
              unstakeTokens={this.unstakeTokens}
          />}
         return (
-            <div>
+            <div className='App' style={{position: 'relative'}}>
+            <div style={{position: 'absolute'}}>
+            <ParticleSettings/>
+            </div>
             <Navbar account={this.state.account}/>
             {/* <h1>{console.log(this.state.loading)}</h1> */}
              <div className='container-fluid mt-5'>

@@ -10,13 +10,13 @@ render(){
         
         <table className='table text-muted text-center'>
             <thead>
-                 <tr style={{color:'black'}}>
+                 <tr style={{color:'white'}}>
                      <th scope='col'> Staking Balance</th>
                      <th scope='col'>Reward Balance</th>
                  </tr>
             </thead>
             <tbody>
-                <tr style={{color:'black'}}>
+                <tr style={{color:'white'}}>
                     <td> {window.web3.utils.fromWei(this.props.stakingBalance, 'Ether')} USDT </td>
                     <td>{window.web3.utils.fromWei(this.props.rwdBalance, 'Ether')} RWD</td>
                 </tr>
@@ -52,8 +52,11 @@ render(){
                     <button type='submit' className='btn btn-warning btn-lg btn-block'>DEPOSIT</button>
                     
                 </div>
-            </form>
-            <button className='btn btn-danger btn-lg btn-block'>UNSTAKE</button>
+            </form> 
+            <button type='submit' onClick={(e)=> {
+                e.preventDefault();
+                this.props.unstakeTokens();
+            }} className='btn btn-danger btn-lg btn-block'>UNSTAKE</button>
             <div className='card-body text-center' style={{color: 'blue'}}> AIRDROP</div>
         </div>
     </div>
